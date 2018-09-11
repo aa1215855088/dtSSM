@@ -46,7 +46,7 @@ public class LoginController {
      * @param model
      * @return
      */
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @RequestMapping(value = "/login")
     public String login(Model model) {
         List<Role> roles = roleService.listAll();
         model.addAttribute("roles", roles);
@@ -61,11 +61,8 @@ public class LoginController {
      * @param session
      * @return 首页
      */
-    @RequestMapping(value = "/logging", method = RequestMethod.GET)
+    @RequestMapping(value = "/logging")
     public String logging(HttpServletRequest request, HttpSession session) {
-
-
-
         //获取账号
         String username = request.getParameter("username");
         //获取密码
