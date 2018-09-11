@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.guigu.datang.dao.TaskDao">
+    <resultMap id="employeeMap" type="com.guigu.datang.domain.Employee">
+        <id property="id" column="employee_id"/>
+        <result property="name" column="employee_name"/>
+        <result property="password" column="password"/>
+        <result property='realName' column="real_name"/>
+        <result property="sex" column="sex"/>
+        <result property="birthday" column="birthday"/>
+        <result property="duty" column="duty"/>
+        <result property="enrollDate" column="enrollDate"/>
+        <result property="education" column="education"/>
+        <result property="major" column="major"/>
+        <result column="experience" property="experience"/>
+        <association property="roleId" javaType="com.guigu.datang.domain.Role">
+            <id property="id" column="role_id"/>
+            <result property="name" column="role_desc"/>
+            <result property="desc" column="role_desc"/>
+        </association>
+    </resultMap>
+    <resultMap id="planMap" type="com.guigu.datang.domain.Plan">
+        <id property="planId" column="plan_id"/>
+        <result property="planName" column="plan_name"/>
+        <result property="status" column="pStatus"/>
+        <result property="beginDate" column="pBeginDate"/>
+        <result property="endDate" column="pEndDate"/>
+        <result property="feedback" column="pFeedback"/>
+    </resultMap>
+    <resultMap id="taskMap" type="com.guigu.datang.domain.Task">
+        <id property="id" column="task_id"/>
+        <result property="name" column="task_name"/>
+        <result property="beginDate" column="begin_date"/>
+        <result property="endDate" column="end_date"/>
+        <result property="realBeginDate" column="real_begin_date"/>
+        <result property="realEndDate" column="real_end_date"/>
+        <result property="status" column="status"/>
+        <result property="status" column="status"/>
+        <result property="taskDesc" column="task_desc"/>
+        <association property="implementorId" resultMap="employeeMap"/>
+        <association property="assignerId" resultMap="employeeMap"/>
+        <collection property="plans" resultMap="planMap"/>
+
+    </resultMap>
+
+    <select id="listAll" resultMap="taskMap">
+        SELECT
+            *,
+            p.status pStatus,
+            p.begin_date pBeginDate,
+            p.end_date pEndDate,
+            p.is_feedback pFeedback
+        FROM t_task t
+            LEFT JOIN t_employee e ON t.implementor_id = e.employee_id
+            LEFT JOIN t_role r ON e.role_id = r.role_id
+            LEFT JOIN t_employee e2 ON t.assigner_id = e2.employee_id
+            LEFT JOIN t_role r2 ON e2.role_id = r2.role_id
+            LEFT JOIN t_plan p ON p.task_id = t.task_id
+    </select>
+
+    <select id="listIntenDanceVO" resultType="com.guigu.datang.vo.ManIntenDanceVO">
+        SELECT
+            t.task_id       id,
+            t.task_name,
+            e.employee_name employeeName,
+            t.begin_date,
+            t.end_date,
+            t.status
+        FROM t_task t
+            LEFT JOIN t_employee e ON t.implementor_id = e.employee_id
+    </select>
+
+    <select id="getTaskById" resultMap="taskMap" parameterType="int">
+        SELECT *,
+            p.status pStatus,
+            p.begin_date pBeginDate,
+            p.end_date pEndDate,
+            p.is_feedback pFeedback
+        FROM t_task t
+            LEFT JOIN t_employee e ON t.implementor_id = e.employee_id
+            LEFT JOIN t_role r ON e.role_id = r.role_id
+            LEFT JOIN t_employee e2 ON t.assigner_id = e2.employee_id
+            LEFT JOIN t_role r2 ON e2.role_id = r2.role_id
+            LEFT JOIN t_plan p ON p.task_id = t.task_id
+        WHERE t.task_id = #{id}
+    </select>
+
+    <update id="updateTaskStatusByTaskId">
+        UPDATE t_task
+        SET status = #{status}
+        WHERE task_id = #{taskId}
+    </update>
+
+    <insert id="save" parameterType="map">
+        INSERT INTO t_task (task_name, task_desc, begin_date, end_date, implementor_id, status)
+            VALUE (#{taskName}, #{taskDesc}, #{beginDate}, #{endDate}, #{employeeName}, "实施中")
+    </insert>
+    <delete id="deleteById" parameterType="int">
+        DELETE FROM t_task
+        WHERE task_id = #{id}
+    </delete>
+    <update id="updateTaskByMap" parameterType="map">
+        UPDATE t_task
+        SET
+            task_name  = #{taskName},
+            task_desc  = #{taskDesc},
+            begin_date = #{beginDate},
+            end_date   = #{endDate},
+            implementor_id=#{manager}
+        WHERE task_id = #{taskId}
+    </update>
+</mapper>

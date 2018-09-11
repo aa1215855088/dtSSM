@@ -1,0 +1,124 @@
+/* CSS Document */
+
+body{margin: 0px;padding: 0px; font-size:12px;text-align: center; margin-top:5px;}
+td{text-align: left;font-size: 12px;}
+a{color: #22357A;text-decoration: none;}
+#logo{width:1002px; height:150px;}
+#middle{width:1002px;}
+#bottom{width:1002px;}/*µ×Í¼*/
+#formleft{width:100px;}
+
+#left {/*×ó²àÁ´½Ó*/
+	background-image: url(../images/bg2.jpg);
+	background-repeat: no-repeat;
+	display:compact;
+	width: 190px;
+	height:400px;
+	float: left;
+	color: #1034A6;
+	text-align: left;
+	padding-top:15px;
+	padding-left:40px;
+	background-position: bottom;
+	font-weight: bold;
+}
+#left p{
+	padding-top:5px;
+	padding-bottom:5px;
+	margin:5px 0 5px 5px;
+	text-indent: 28px;
+	background:url(../images/sig.jpg) no-repeat 8px;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #316AC5;
+}
+#left2 {/*×ó²àÁ´½Ó*/
+	background-image: url(../images/bg2.jpg);
+	background-repeat: no-repeat;
+	display:compact;
+	width: 190px;
+	height:500px;
+	float: left;
+	color: #1034A6;
+	text-align: left;
+	padding-top:15px;
+	padding-left:40px;
+	background-position: bottom;
+	font-weight: bold;
+}
+#left2 p{
+	padding-top:5px;
+	padding-bottom:5px;
+	margin:5px 0 5px 5px;
+	text-indent: 28px;
+	background:url(../images/sig.jpg) no-repeat 8px;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #316AC5;
+}
+#right {/*ÓÒ²àÁ´½Ó*/
+	background: url(../images/bg/line.gif);
+	background-repeat: repeat-y;
+	display:compact;
+	width: 700px;
+	float: left;
+	color: #666666;
+	text-align: left;
+	margin-left:20px;
+	margin-right:20px;
+	padding-top:15px;
+	padding-left:20px;
+}
+.table{ border-bottom:#6699FF dashed 1px;padding-left:10px;margin-bottom:5px;}
+#right td{height:23px;text-align: left;font-size: 12px;vertical-align:middle;border-top: 1px dashed #6699FF;}
+#right p{margin: 0 0 4px 0;}
+.tdcolor{background-color: #F9F9F9;color:#003399;}
+/*ÓÒ²àÀ¶É«±ß¿òµ×Í¼ÉèÖÃ*/
+.rightimg{
+	background-image: url(../images/bgright.jpg);
+	background-repeat: no-repeat;
+	background-position: right 20px;
+}
+.marginleft{margin-left:99px;}
+.marginleft1{margin-left:42px;}
+
+/*Ê×Ò³ÖÐ¼ä²¿·ÖÉèÖÃ*/
+.login{color: #5E5E5E; height:185px; text-align:left;line-height: 10px;padding: 0 0px 0 760px;}
+.login p{margin: 7px;}
+
+
+.menu1{width:60px;text-align: center;color: #8A8A8A;line-height: 18px; }
+.menu1 a{color: #8A8A8A;text-decoration: none;}
+.menu2{width:60px;text-align: center;color: #8A8A8A;line-height: 18px; margin-left:540px;}
+.menu2 a{color: #8A8A8A;text-decoration: none;}
+.menu3{width:80px;text-align: center;color: #8A8A8A;line-height: 18px; margin-left:620px;}
+.menu3 a{color: #8A8A8A;text-decoration: none;}
+.menu4{width:60px;text-align: center;color: #8A8A8A;line-height: 18px; margin-left:640px;}
+.menu4 a{color: #8A8A8A;text-decoration: none;}
+
+#form001{margin-top: 0px;}
+
+
+h1{color: #FF8A00;font-weight: 600;font-size: 18px;}
+h2{text-align: left;color: #636363;font-weight: 600;font-size: 12px;margin: 0px;}
+
+.bg01 {
+	BACKGROUND: url(http://news.sohu.com/upload/images_2007/pic004.gif) no-repeat; HEIGHT: 31px
+}
+
+.bg02 {
+	BACKGROUND: #bfd1e8 fixed no-repeat center center; HEIGHT: 31px
+}
+
+.f14b_0334 {
+	FONT-WEIGHT: bold; FONT-SIZE: 14px; COLOR: #03349b; LINE-HEIGHT: 26px
+}
+.f14b_0334 A:link {
+	FONT-SIZE: 14px; COLOR: #03349b; TEXT-DECORATION: none
+}
+.f14b_0334 A:visited {
+	FONT-SIZE: 14px; COLOR: #03349b; TEXT-DECORATION: none
+}
+.f14b_0334 A:hover {
+	FONT-SIZE: 14px; COLOR: #03349b; TEXT-DECORATION: none
+}

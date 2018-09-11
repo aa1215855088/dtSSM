@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.guigu.datang.dao.RoleDao">
+
+    <select id="listAll" resultType="com.guigu.datang.domain.Role">
+        SELECT
+        role_id AS 'id' ,
+        role_name AS 'name',
+        role_desc AS  'desc'
+        FROM t_role;
+    </select>
+
+</mapper>

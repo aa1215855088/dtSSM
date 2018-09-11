@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.guigu.datang.dao.EmployeeDao">
+
+    <resultMap id="employeeMap" type="com.guigu.datang.domain.Employee">
+        <id property="id" column="employee_id"/>
+        <result property="name" column="employee_name"/>
+        <result property="password" column="password"/>
+        <result property='realName' column="real_name"/>
+        <result property="sex" column="sex"/>
+        <result property="birthday" column="birthday"/>
+        <result property="duty" column="duty"/>
+        <result property="enrollDate" column="enrollDate"/>
+        <result property="education" column="education"/>
+        <result property="major" column="major"/>
+        <result column="experience" property="experience"/>
+        <association property="roleId" javaType="com.guigu.datang.domain.Role">
+            <id property="id" column="role_id"/>
+            <result property="name" column="role_name"/>
+            <result property="desc" column="role_desc"/>
+        </association>
+        <association property="employee" column="parent_id" javaType="com.guigu.datang.domain.Employee"
+                     select="getParent">
+        </association>
+    </resultMap>
+
+    <select id="listAll" resultType="com.guigu.datang.domain.Employee">
+       SELECT
+       e.employee_id AS 'id',
+       e.employee_name AS 'name',
+       e.password,
+       e.real_name,
+       e.sex,
+       e.birthday,
+       e.duty,
+       e.enrollDate,
+       e.education,
+       e.major,
+       e.experience,
+       r.role_id"roleId.id",
+       r.role_name"roleId.name",
+       r.role_desc"roleId.desc"
+       FROM  t_employee e , t_role r WHERE e.role_id = r.role_id
+    </select>
+
+    <select id="getById" resultMap="employeeMap" parameterType="int">
+           SELECT
+              *
+       FROM  t_employee e LEFT JOIN t_role r ON e.role_id = r.role_id
+       WHERE e.employee_id=#{id}
+    </select>
+
+    <select id="getParent" parameterType="int" resultType="com.guigu.datang.domain.Employee">
+        SELECT
+        e.employee_id AS 'id',
+        e.employee_name AS 'name',
+        e.password,
+        e.real_name,
+        e.sex,
+        e.birthday,
+        e.duty,
+        e.enrollDate,
+        e.education,
+        e.major,
+        e.experience,
+        r.role_id"roleId.id",
+        r.role_name"roleId.name",
+        r.role_desc"roleId.desc"
+        FROM t_employee e LEFT JOIN t_role r ON e.role_id = r.role_id WHERE employee_id=#{parent_id}
+    </select>
+    <select id="listByMap" resultType="com.guigu.datang.domain.Employee"
+            parameterType="com.guigu.datang.domain.Employee">
+        SELECT
+        e.employee_id AS 'id',
+        e.employee_name AS 'name',
+        e.password,
+        e.real_name,
+        e.sex,
+        e.birthday,
+        e.duty,
+        e.enrollDate,
+        e.education,
+        e.major,
+        e.experience,
+        r.role_id"roleId.id",
+        r.role_name"roleId.name",
+        r.role_desc"roleId.desc"
+        FROM t_employee e LEFT JOIN t_role r ON e.role_id = r.role_id
+        <trim prefix="WHERE" prefixOverrides="AND">
+
+            <if test="username != null and username != ''">
+                e.employee_name=#{username}
+            </if>
+            <if test="password != null and password != ''">
+                AND e.password=#{password}
+            </if>
+            <if test="roleId!=null and roleId!=0">
+                AND e.role_id=#{roleId}
+            </if>
+        </trim>
+    </select>
+
+    <insert id="saveEmployee" parameterType="map">
+       INSERT INTO t_employee (employee_name, password, real_name, sex, birthday, duty, enrollDate, education, major, experience, role_id, parent_id)
+  VALUE (#{employeeName},#{password},#{realName},#{sex},#{birthday},#{duty},#{enrollDate},#{education},#{major},#{experience},#{roleId},NULL)
+    </insert>
+
+    <delete id="deleteById" parameterType="int">
+        DELETE FROM t_employee WHERE employee_id=#{id}
+    </delete>
+
+
+    <update id="updateByMap" parameterType="map">
+
+         UPDATE t_employee
+               SET
+  employee_name = #{employeeName},
+  password      = #{password},
+  real_name     = #{realName},
+  sex           = #{sex},
+  birthday      = #{birthday]},
+  duty          = #{duty},
+  enrollDate    = #{enrollDate},
+  education     = #{education},
+  major         = #{major},
+  experience    = #{experience},
+  role_id       = #{roleId},
+  parent_id     = #{parentId}
+          WHERE employee_id = #{employeeName}
+    </update>
+
+    <update id="updateParentById" parameterType="map">
+        UPDATE t_employee SET parent_id=#{parentId} WHERE employee_id=#{id}
+    </update>
+
+    <select id="listPerson" resultType="com.guigu.datang.vo.ManCheckperVO">
+        SELECT
+        employee_id id ,
+        employee_name name,
+        sex,
+        enrollDate,
+        duty
+        FROM t_employee WHERE role_id=3
+    </select>
+
+    <select id="listManagerName" resultType="String">
+        SELECT
+        employee_name
+        FROM t_employee WHERE role_id=2
+    </select>
+    <select id="listManagerNameAndId" resultType="map">
+        SELECT
+        employee_id id ,
+        employee_name name
+        FROM t_employee WHERE role_id=2
+    </select>
+</mapper>
